@@ -8,9 +8,6 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Set $SHELL to zsh
-export SHELL=/bin/zsh
-
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -18,7 +15,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -80,7 +77,13 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git) 
+plugins=(
+	git
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+    you-should-use
+	colored-man-pages
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,11 +98,11 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
@@ -113,43 +116,69 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-#[ -f "/home/sura/.ghcup/env" ] && source "/home/sura/.ghcup/env" # ghcup-env
-[ -f "/home/sura/.ghcup/env" ] && source "/home/sura/.ghcup/env" # ghcup-env
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
-
-export PATH="$HOME/.local/bin:$PATH"
-
-source /home/sura/.nix-profile/etc/profile.d/nix.sh
-
-export PATH=$PATH:/usr/local/go/bin
-
-source /home/sura/.bash_completions/db.py.sh
-
-alias pdf_utils="python3 /home/sura/Desktop/repo/africa_machine_learning/pdf_to_txt/pdf_utils.py"
-
-source /home/sura/.bash_completions/transcriber.py.sh
-. "$HOME/.cargo/env"
-
-export PATH="/home/sura/go/bin:$PATH"
-
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+################################################
+# Neovim
+################################################
+# add nvim to path
+export PATH="$PATH:/opt/nvim-linux64/bin"
+################################################ 
 
 
-# zsh-syntax-highlighting setup
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+################################################
+# Oh My Zsh
+################################################
+# set theme to be powerlevel10k
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# zsh-autosuggestions setup
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#19ddff"
+# Custom key bindings for zsh-autosuggestions
 bindkey '^[[Z' autosuggest-accept
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/home/sura/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
+# MY ALIASES
+
+# Django management alias 
+alias pym="python manage.py"
+
+# alias for starting venv
+alias vnv="source venv/bin/activate"
+
+# nvim --> n alias
+alias n="nvim"
+
+# generate a random token
+# TODO: Make it accept arguments
+alias tokengen="python3 -c \"import secrets; print(secrets.token_hex())\""
+
+# shorter tmux
+alias t="tmux"
+
+# home manamger -> hm
+alias hm="home-manager"
+
+# pip freeze > requirements.txt
+alias pipfreeze="pip freeze > requirements.txt"
+
+# ssh connections
+alias ssh-hetzner="ssh root@188.245.240.215"
+alias ssh-mpxstaging="ssh -J surafel@52.21.96.46 surafel@10.8.101.214"
+
+# MY ALIASES END
+
+
+[ -f "/home/sura/.ghcup/env" ] && . "/home/sura/.ghcup/env" # ghcup-env

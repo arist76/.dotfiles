@@ -10,19 +10,15 @@ end
 
 local servers = {
 
-	"clangd",
 	"cssls",
 	"dockerls",
-	"gopls",
 	"html",
-	"jsonls",
-	"tsserver",
+	"ts_ls",
 	"lua_ls",
 	"pyright",
 	"rust_analyzer",
 	"tailwindcss",
 	"eslint",
-	"svelte",
 }
 
 return {

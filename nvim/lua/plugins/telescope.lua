@@ -12,6 +12,7 @@ return {
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "help_tags" })
 			vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "find todos" })
 			vim.keymap.set("n", "<leader>th", builtin.colorscheme, { desc = "select themes" })
+			vim.keymap.set("n", "<leader>fe", ":Telescope diagnostics<CR>", { desc = "find errors" })
 			-- LSP
       -- DOC https://github.com/nvim-telescope/telescope.nvim#neovim-lsp-pickers
       vim.keymap.set('n', 'gr', builtin.lsp_references, {desc = "Find references"})

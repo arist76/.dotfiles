@@ -15,10 +15,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+-- use default cursor
+vim.opt.guicursor = "n-v-i-c:block-Cursor"
+
 -- load setups
 require("vim-options")
 require("lazy").setup("plugins")
 
--- set theme
-vim.cmd.colorscheme("vscode_modern")
 
